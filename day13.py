@@ -61,7 +61,7 @@ def p2(start,dest):
     (x,y)=start
     q=[(x,y)]
     steps[(x,y)]=1
-    while len(q)>0:
+    while len(q)>=0:
         (x,y) = q[0]
         q = q[1:]
         nexts = next_positions(x,y)
