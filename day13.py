@@ -14,6 +14,8 @@ def is_wall(x,y):
 def next_positions(x,y):
     p = [ (x+a,y+b) for (a,b) in dirs if x+a>=0 and y+b>=0
           and (x+a,y+b) not in steps and (x+a,y+b) not in walls]
+          
+
     #print(walls)
     [ set_wall(x,y)  for (x,y) in p if is_wall(x,y)  ]
     p=[(x,y) for (x,y) in p if (x,y) not in walls]
@@ -81,8 +83,8 @@ clear()
 
 code=1350
 dest=(31,39)
-#ode=10
-#est=(7,4)
+#code=10
+#dest=(7,4)
 #search((1,1),dest)
 p2((1,1),dest)
 
