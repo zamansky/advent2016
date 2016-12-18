@@ -37,6 +37,8 @@ def search(loc,dest,input):
         if (current==dest):
             dones.append(len(sofar))
             print(len(sofar))
+            print(sofar)
+            return
             continue
         
         nexts = make_cells(current,sofar,input)
@@ -45,4 +47,4 @@ def search(loc,dest,input):
 
     
 search((0,0),(3,3),input)
-print(max(dones))
+#print(max(dones))
