@@ -1,16 +1,17 @@
 import hashlib
 
-input="hijk"
+oinput="hijkl"
 dstring = "UDLR"
 
 dirs=[(0,-1),(0,1),(-1,0),(1,0)]
-
+opens="bcdef"
 
 loc=(0,0)
 visited={}
 
 
 def make_cells(tuple,sofar,input):
+    (x,y)=tuple
     s = input+sofar
     s=s.encode('utf-8')
     h = hashlib.md5(s).hexdigest()[0:4]
