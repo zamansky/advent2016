@@ -1,4 +1,4 @@
-import hashlib
+jedxjedimport hashlib
 dstring = "UDLR"
 
 dirs=[(0,-1),(0,1),(-1,0),(1,0)]
@@ -24,3 +24,6 @@ def search(loc,dest,h):
     q.append((loc,dest,h,""))
     while q:
         pass
+
+
+    
