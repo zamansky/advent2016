@@ -12,6 +12,8 @@ lines = [
     
 lines = sorted(lines,key=lambda x: x[0])
 
+
+# merge overlapping ranges into each other
 i=1
 while i<len(lines):
     if lines[i][0] > lines[i-1][1]:
@@ -20,6 +22,7 @@ while i<len(lines):
     if lines[i][1]>lines[i-1][1]:
         lines[i-1][1]=lines[i][1]
     del(lines[i])
+
 
 part1Done=False
 totalIps=0
