@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+
 struct node {
   int id;
   int presents;
@@ -12,17 +13,13 @@ struct node {
 int size=3004953;
 
 int part1(struct node *first){
-  //  first = first->next;
+
   while (first->next != first){
     
     //std::cout << "REMOVING: "<< first->next->id << std::endl;
     first->next->next->prev = first;
     first->next = first->next->next;
-    //    first->prev->next = first->next;
-    //first->next->prev = first->prev;
     first = first->next;
-    
-      
   }
   return first->id;
 }
@@ -78,22 +75,21 @@ int zloopit(struct node *n){
 }
 
 
-int main(){
+
+
+
+struct node *make_ring(int size){
   int i;
   struct node *n;
   struct node *current,*first;
 
-
-  current = (struct node *)malloc(sizeof(struct node));
+  first = (struct node *)malloc(sizeof(struct node));
   first->id=1;
-  first->presents=1;
-  first = current;
+  current=first;
   
   for  (i=0;i<size-1;i++){
     n=(struct node *)malloc(sizeof(struct node));
     n->id=i+1;
-    
-    n->presents=1;
     n->prev=current;
     current->next=n;
     current=n;
@@ -101,6 +97,17 @@ int main(){
   }
   current->next=first;
   first->prev=current;
-  //    std::cout << part1(first)+1 << std::endl;
+  return first;
+
+}
+
+int main(){
+  struct node *first;
+
+  first = make_ring(size);
+  std::cout << part1(first)+1 << std::endl;
+  free(first);
+  first = make_ring(size);
   std::cout << part2(first,size)+1 << std::endl;
+  free(first);
 }
