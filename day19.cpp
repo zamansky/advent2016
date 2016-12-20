@@ -30,7 +30,7 @@ int part2(struct node *first,int size){
   struct node *current,*t;
   int done=0;
   
-  // stage
+  // set the stage by moving t half way down the ring
   current=first;
   t=first;
   while (!done){
@@ -42,8 +42,6 @@ int part2(struct node *first,int size){
 
 
   /* now t is halfway */
-  
-
   int step=0;
   while (first->next != first){
     
@@ -57,21 +55,12 @@ int part2(struct node *first,int size){
     
     step++;
 
-    
     if (step%2!=0)
       t=t->next;
     
       
   }
   return first->id;
-}
-
-int zloopit(struct node *n){
-  while (1){
-    std::cout << n->id << std::endl;
-    n=n->next;
-  }
-  return 0;  
 }
 
 
