@@ -5,7 +5,7 @@ struct node {
   int id;
   int presents;
   struct node *next;
-  struct node *prev;
+  
 
 };
 
@@ -17,7 +17,6 @@ int part1(struct node *first){
   while (first->next != first){
     
     //std::cout << "REMOVING: "<< first->next->id << std::endl;
-    first->next->next->prev = first;
     first->next = first->next->next;
     first = first->next;
   }

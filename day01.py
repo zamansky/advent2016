@@ -183,10 +183,10 @@ for i in l:
             locs[(x,y)]=1
         else:
             print((x,y))
-            sys.exit(0)
+            #sys.exit(0)
             break
     
 
-#print(x,y)
-#p#rint(totalsteps)
+print(x,y)
+print(totalsteps)
     
