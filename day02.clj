@@ -1,4 +1,4 @@
-(use '[clojure.string :only (join split)])
+(use '[clojure.string :only (join split trim-newline)])
 (defn parse-int [s] (Integer/parseInt s))
 
 
@@ -17,53 +17,44 @@
 
 (def dirs [ '(0 1) '(1 0) '(0 -1) '(-1 0) ])
 
-(def rawdata (split(slurp "day02.dat") #", "))
-(def pos '(2 2 \z ""))
-
-(defn oldupdate_pos
-  [ [x y dir] move]
-  (let [
-       turn (first move)
-        samount (subs move 1)
-        amount (parse-int samount)
-        tmpnewdir (if (= turn \L)
-                 (dec dir)
-                 (inc dir))
-        newdir (mod tmpnewdir 4)
-        newx (+ x (* amount (first (nth dirs newdir))))
-        newy (+ y (* amount (second (nth dirs newdir))))
-        ]
-    
-  [newx newy newdir]
-  ))
-
-(reduce update_pos pos rawdata)
 
 
 
 
-(def deltas {:R '(-1 0)
-         :L '(1 0)
-         :U '(0 -1)
-         :D '(0 1)})
+(def deltas {:R '(0 1)
+             :L '(0 -1)
+             :U '(-1 -0)
+             :D '(1 0)})
 
-(def line "RRLLLLLRUUDDDDDDDDDU")
-(def lines ["RLLLRRUR" "URR"])
+
 (defn get-code
-  [[x y num] move]
+  [[x y num code] move]
   (let [move (keyword (str move))
         [dx dy] (deltas move)
         newx (+ x dx)
         newy (+ y dy)
         
         res (if (= (get-in board [newx newy]) \ )
-              [x y (get-in board [x y]) ]
-              [newx newy (get-in board [newx newy])])
+              [x y (get-in board [x y]) code ]
+              [newx newy (get-in board [newx newy]) code])
 
         ]
     res
     
     ))
 
-(reduce (fn [pos line]
-          (reduce get-code pos line)) pos lines)
+
+(def rawdata (map trim-newline (split(slurp "day02.dat") #"\n")))
+(def pos '(2 2 \5 ""))
+
+
+(-> (reduce (fn [[x y num code] line]
+          (let [ [nx ny nnum ncode] (reduce get-code [x y num code] line)
+                ]
+            [nx ny num (str nnum code)]
+            )
+              )pos rawdata)
+    (nth 3)
+    clojure.string/reverse
+    )
+
